@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Griffin Yellin — Driver · Engineer</title>
+<link rel="icon" href="assets/logo-mark-red.png" />
+<style>
+  @font-face {
+    font-family: 'Speeday';
+    src: url('assets/fonts/Speeday-Bold.ttf') format('truetype');
+    font-weight: 700; font-style: normal; font-display: swap;
+    unicode-range: U+0041-005A, U+0061-007A, U+0020, U+002D, U+002E, U+002C, U+003A, U+003B, U+0027, U+0022, U+00A0, U+2014, U+2013;
+  }
+  @font-face {
+    font-family: 'GYBody';
+    src: url('assets/fonts/BrandBody.ttf') format('truetype');
+    font-weight: 400 700; font-style: normal; font-display: swap;
+  }
+
+  :root{
+    --red:#E21A1A;
+    --red-ink:#B71212;
+    --black:#0A0A0A;
+    --ink:#111;
+    --paper:#F4F2EE;
+    --paper-2:#E9E5DE;
+    --line:rgba(255,255,255,.14);
+    --line-dark:rgba(0,0,0,.12);
+    --display: 'Speeday', 'Arial Black', 'Helvetica Neue', Impact, system-ui, sans-serif;
+    --body: 'GYBody', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --type-scale: 1;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--black);color:#fff;font-family:var(--body);-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--red);color:#fff}
+
+  /* Display type */
+  .display{font-family:var(--display);letter-spacing:-.005em;line-height:.86;text-transform:uppercase;font-style:italic}
+  .tag{font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:calc(12px * var(--type-scale));font-style:normal}
+  .mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;letter-spacing:.02em}
+
+  /* ====== NAV ====== */
+  .nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 28px;backdrop-filter:blur(10px);background:linear-gradient(to bottom,rgba(10,10,10,.75),rgba(10,10,10,0))}
+  .nav .brand{display:flex;align-items:center;gap:12px}
+  .nav .brand img{height:30px}
+  .nav .links{display:flex;gap:22px}
+  .nav .links a{font-family:var(--display);font-style:italic;font-size:calc(13px * var(--type-scale));letter-spacing:.06em;text-transform:uppercase;opacity:.78;transition:opacity .2s, color .2s}
+  .nav .links a:hover{opacity:1;color:var(--red)}
+  .nav .cta{border:1.5px solid #fff;padding:9px 14px;font-family:var(--display);font-style:italic;font-size:calc(12px * var(--type-scale));letter-spacing:.1em;text-transform:uppercase;transition:background .2s,color .2s}
+  .nav .cta:hover{background:var(--red);border-color:var(--red)}
+
+  /* Hamburger toggle — hidden on desktop */
+  .nav-toggle{display:none;background:transparent;border:0;width:40px;height:40px;padding:8px;cursor:pointer;flex-direction:column;justify-content:space-between;align-items:stretch}
+  .nav-toggle span{display:block;height:2px;width:100%;background:#fff;transition:transform .25s, opacity .2s}
+  .nav[data-menu-open="true"] .nav-toggle span:nth-child(1){transform:translateY(10px) rotate(45deg)}
+  .nav[data-menu-open="true"] .nav-toggle span:nth-child(2){opacity:0}
+  .nav[data-menu-open="true"] .nav-toggle span:nth-child(3){transform:translateY(-10px) rotate(-45deg)}
+
+  /* ====== HERO ====== */
+  .hero{position:relative;min-height:100vh;overflow:hidden;background:#000}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+  .hero .vig{position:absolute;inset:0;background:
+    radial-gradient(120% 80% at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 70%, #000 100%),
+    linear-gradient(180deg, rgba(10,10,10,.5) 0%, rgba(10,10,10,0) 20%, rgba(10,10,10,0) 60%, #000 100%);}
+  .hero .content{position:relative;z-index:2;padding:22vh 28px 100px;max-width:1600px;margin:0 auto}
+
+  /* HERO VARIANT A — massive name, red bar */
+  .hero.variant-a .content{display:grid;gap:20px}
+  .hero.variant-a .hero-name{font-size:clamp(84px, 17vw, 280px);font-family:var(--display);font-style:italic;line-height:.82;letter-spacing:-.01em;text-transform:uppercase}
+  .hero.variant-a .hero-name .r1{display:block}
+  .hero.variant-a .hero-name .r2{display:block;color:var(--red);margin-left:.4em}
+  .hero.variant-a .strap{display:flex;align-items:center;gap:18px;margin-top:18px;flex-wrap:wrap}
+  .hero.variant-a .strap .bar{width:60px;height:4px;background:var(--red)}
+  .hero.variant-a .strap .role{font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.08em;font-size:calc(18px * var(--type-scale))}
+  .hero.variant-a .strap .role .slash{color:var(--red);margin:0 10px}
+  .hero.variant-a .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:50px;max-width:900px;border-top:1px solid var(--line);padding-top:24px}
+  .hero.variant-a .meta .k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-bottom:6px}
+  .hero.variant-a .meta .v{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:calc(18px * var(--type-scale));letter-spacing:.02em}
+
+  /* HERO VARIANT B — editorial split */
+  .hero.variant-b .content{display:grid;grid-template-columns: 1.3fr 1fr;gap:60px;align-items:end;padding:18vh 28px 80px}
+  .hero.variant-b .hero-name{font-size:clamp(72px, 11vw, 180px);font-family:var(--display);font-style:italic;line-height:.86;text-transform:uppercase}
+  .hero.variant-b .hero-name .r2{color:var(--red)}
+  .hero.variant-b .sidecard{border:1px solid var(--line);background:rgba(0,0,0,.45);padding:26px;backdrop-filter:blur(6px)}
+  .hero.variant-b .sidecard h4{margin:0 0 8px;font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.06em;font-size:calc(14px * var(--type-scale))}
+  .hero.variant-b .sidecard p{margin:0;font-size:calc(14px * var(--type-scale));line-height:1.55;opacity:.88}
+  .hero.variant-b .sidecard .dot{width:8px;height:8px;background:var(--red);display:inline-block;margin-right:8px;vertical-align:middle}
+  .hero.variant-b .meta{display:flex;gap:30px;margin-top:30px;flex-wrap:wrap}
+  .hero.variant-b .meta div .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-bottom:4px}
+  .hero.variant-b .meta div .v{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:calc(14px * var(--type-scale))}
+  @media (max-width:900px){.hero.variant-b .content{grid-template-columns:1fr}}
+
+  /* HERO VARIANT C — centered plate */
+  .hero.variant-c .content{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18vh 28px 100px}
+  .hero.variant-c .plate{font-family:var(--display);font-style:italic;text-transform:uppercase;color:var(--red);letter-spacing:.3em;font-size:calc(13px * var(--type-scale));margin-bottom:24px}
+  .hero.variant-c .hero-name{font-size:clamp(72px, 15vw, 230px);font-family:var(--display);font-style:italic;line-height:.82;text-transform:uppercase}
+  .hero.variant-c .hero-name .r2{color:var(--red);display:block}
+  .hero.variant-c .sub{margin-top:26px;font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.16em;font-size:calc(14px * var(--type-scale));opacity:.92}
+  .hero.variant-c .sub span{color:var(--red);margin:0 10px}
+
+  /* Scroll indicator */
+  .scrollhint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--display);font-style:italic;letter-spacing:.2em;font-size:11px;text-transform:uppercase;opacity:.7;display:flex;align-items:center;gap:10px}
+  .scrollhint::before{content:'';width:40px;height:1px;background:#fff;opacity:.5}
+
+  /* Ticker */
+  .ticker{background:var(--red);color:#fff;overflow:hidden;border-top:2px solid #000;border-bottom:2px solid #000}
+  .ticker-inner{display:flex;gap:60px;padding:14px 0;animation:tick 40s linear infinite;white-space:nowrap}
+  .ticker-inner span{font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.1em;font-size:calc(18px * var(--type-scale))}
+  .ticker-inner span::after{content:'/';margin-left:60px;color:rgba(0,0,0,.4)}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ====== SECTIONS ====== */
+  section{padding:110px 28px;position:relative}
+  .wrap{max-width:1400px;margin:0 auto}
+
+  .sec-black{background:var(--black);color:#fff}
+  .sec-paper{background:var(--paper);color:var(--ink)}
+  .sec-paper .tag{color:var(--red)}
+
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:30px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:60px}
+  .sec-paper .section-head{border-bottom:1px solid var(--line-dark)}
+  .section-head .l{display:flex;align-items:baseline;gap:20px}
+  .section-head .num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;color:var(--red);font-size:calc(13px * var(--type-scale));letter-spacing:.2em;padding:8px 12px;border:1px solid var(--red);display:inline-flex;align-items:center}
+  .section-head .num::before{content:'CH '}
+  .section-head .title{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:calc(36px * var(--type-scale));letter-spacing:-.01em}
+  .section-head .year{font-family:ui-monospace,monospace;font-size:calc(13px * var(--type-scale));opacity:.6;letter-spacing:.08em}
+
+  /* STORY INTRO */
+  .intro{display:grid;grid-template-columns:1.3fr 1fr;gap:80px;align-items:center}
+  .intro .eyebrow{color:var(--red)}
+  .intro h2{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:clamp(40px,6vw,96px);line-height:.92;margin:18px 0 24px;letter-spacing:-.01em}
+  .intro h2 em{font-style:italic;color:var(--red)}
+  .intro p{font-size:calc(16px * var(--type-scale));line-height:1.7;opacity:.86;max-width:60ch;margin:0 0 14px}
+  .intro .panel{background:#0f0f0f;border:1px solid var(--line);padding:28px}
+  .intro .panel h4{margin:0 0 12px;font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.06em;color:var(--red);font-size:calc(14px * var(--type-scale))}
+  .intro .panel ul{margin:0;padding:0;list-style:none}
+  .intro .panel li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line);font-size:calc(14px * var(--type-scale))}
+  .intro .panel li:last-child{border-bottom:0}
+  .intro .panel li .k{opacity:.6;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  .intro .panel li .v{font-family:var(--display);font-style:italic;text-transform:uppercase}
+  @media (max-width:900px){.intro{grid-template-columns:1fr;gap:40px}}
+
+  /* CHAPTER */
+  .chapter{position:relative;display:grid;grid-template-columns: 1fr 1.2fr;gap:60px;align-items:start}
+  .chapter.flip{grid-template-columns: 1.2fr 1fr}
+  .chapter.flip .side{order:2}
+  .chapter.flip .media{order:1}
+  .chapter .side .era{font-family:var(--display);font-style:italic;text-transform:uppercase;color:var(--red);letter-spacing:.14em;font-size:calc(13px * var(--type-scale))}
+  .chapter .side h3{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:clamp(48px,6.5vw,108px);line-height:.85;margin:10px 0 6px;letter-spacing:-.01em}
+  .chapter .side .sub{font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.08em;font-size:calc(16px * var(--type-scale));opacity:.85;margin-bottom:24px}
+  .chapter .side p{font-size:calc(16px * var(--type-scale));line-height:1.7;opacity:.88;max-width:54ch;margin:0 0 14px}
+  .chapter .side .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px;border-top:1px solid var(--line);padding-top:20px}
+  .sec-paper .chapter .side .meta{border-top:1px solid var(--line-dark)}
+  .chapter .side .meta .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-bottom:4px}
+  .chapter .side .meta .v{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:calc(16px * var(--type-scale))}
+  .chapter .side .tracks{margin-top:20px;display:flex;flex-wrap:wrap;gap:6px}
+  .chapter .side .tracks span{border:1px solid currentColor;padding:6px 10px;font-family:var(--display);font-style:italic;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+
+  .media{display:grid;gap:12px}
+  .media .big{aspect-ratio: 4/3;overflow:hidden;position:relative;background:#111}
+  .media .big img{width:100%;height:100%;object-fit:cover;filter:contrast(1.02) saturate(1.05)}
+  .media .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .media .row .t{aspect-ratio:1/1;overflow:hidden;background:#111}
+  .media .row .t img{width:100%;height:100%;object-fit:cover}
+  .media figcaption{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;opacity:.6;margin-top:4px;text-transform:uppercase}
+
+  @media (max-width:900px){
+    .chapter,.chapter.flip{grid-template-columns:1fr;gap:30px}
+    .chapter.flip .side,.chapter.flip .media{order:initial}
+  }
+
+  /* CHAPTER DIVIDER */
+  .divider{display:flex;align-items:center;gap:28px;padding:48px 32px;background:#000;color:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .divider .n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;color:var(--red);font-size:calc(13px * var(--type-scale));letter-spacing:.2em;padding:8px 12px;border:1px solid var(--red);display:inline-flex;align-items:center;gap:6px;flex-shrink:0}
+  .divider .n::before{content:'CH'}
+  .divider .t{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:calc(26px * var(--type-scale));letter-spacing:-.005em;flex:1;line-height:1}
+  .divider .y{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;opacity:.55;font-size:calc(12px * var(--type-scale));letter-spacing:.18em;flex-shrink:0}
+
+  /* ENGINEERING GRID */
+  .eng-hero{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:60px}
+  .eng-hero h3{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:clamp(48px,7vw,120px);line-height:.84;margin:0 0 24px;letter-spacing:-.01em}
+  .eng-hero h3 em{color:var(--red)}
+  .eng-hero p{font-size:calc(16px * var(--type-scale));line-height:1.7;opacity:.88;margin:0 0 14px;max-width:54ch}
+  .eng-stack{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+  .eng-stack .card{border:1px solid var(--line-dark);padding:20px;background:#fff}
+  .eng-stack .card h5{margin:0 0 10px;font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:calc(13px * var(--type-scale));letter-spacing:.08em;color:var(--red)}
+  .eng-stack .card p{margin:0;font-size:calc(13px * var(--type-scale));line-height:1.55;color:#333}
+  .eng-media{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:16px}
+  .eng-media .t{aspect-ratio:16/9;overflow:hidden;background:#ddd}
+  .eng-media .t.small{aspect-ratio:1/1}
+  .eng-media .t img{width:100%;height:100%;object-fit:cover}
+  .eng-cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.08em;font-size:calc(13px * var(--type-scale));border:1.5px solid currentColor;transition:all .2s}
+  .btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+  .btn.primary:hover{background:#c91414;border-color:#c91414}
+  .btn:hover{color:var(--red);border-color:var(--red)}
+  .btn.on-dark{border-color:#fff;color:#fff}
+  .btn.on-dark:hover{background:var(--red);border-color:var(--red);color:#fff}
+  .btn .arr{font-style:normal}
+  @media (max-width:900px){.eng-hero,.eng-stack,.eng-media{grid-template-columns:1fr!important}}
+
+  /* ECLIPSE */
+  .eclipse{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .eclipse .copy h3{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:clamp(40px,6vw,96px);line-height:.86;margin:12px 0 20px}
+  .eclipse .copy h3 em{color:#a855f7}
+  .eclipse .copy p{font-size:calc(16px * var(--type-scale));line-height:1.7;opacity:.88;margin:0 0 14px;max-width:54ch}
+  .eclipse .logo-box{background:#0f0f0f;border:1px solid var(--line);padding:50px;display:flex;align-items:center;justify-content:center;aspect-ratio:16/10;position:relative;overflow:hidden}
+  .eclipse .logo-box::before{content:'';position:absolute;inset:-50%;background:radial-gradient(circle, rgba(168,85,247,.25) 0%, rgba(168,85,247,0) 60%)}
+  .eclipse .logo-box img{max-width:85%;position:relative;z-index:2}
+  .eclipse .badge{display:inline-flex;align-items:center;gap:10px;border:1px solid #a855f7;color:#a855f7;padding:8px 12px;font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.14em;font-size:11px;margin-bottom:6px}
+  .eclipse .badge .d{width:6px;height:6px;background:#a855f7;border-radius:50%;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  @media (max-width:900px){.eclipse{grid-template-columns:1fr}}
+
+  /* EXCAMPS */
+  .excamps{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:center}
+  .excamps .card{background:#000;color:#fff;border:1px solid var(--line);padding:44px;position:relative;overflow:hidden}
+  .excamps .card .quote{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:clamp(28px,3.6vw,52px);line-height:1.05;margin:0 0 22px}
+  .excamps .card .quote em{color:var(--red);font-style:italic}
+  .excamps .card p{font-size:calc(15px * var(--type-scale));line-height:1.65;opacity:.82;margin:0 0 22px;max-width:52ch}
+  .excamps .aside h4{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:calc(14px * var(--type-scale));color:var(--red);letter-spacing:.1em;margin:0 0 10px}
+  .excamps .aside h3{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:clamp(36px,5vw,72px);line-height:.9;margin:0 0 20px}
+  .excamps .aside p{font-size:calc(16px * var(--type-scale));line-height:1.7;opacity:.88;margin:0 0 14px;max-width:52ch}
+  @media (max-width:900px){.excamps{grid-template-columns:1fr}}
+
+  /* CONTACT */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .contact h2{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:clamp(60px,10vw,180px);line-height:.84;margin:0 0 20px;letter-spacing:-.015em}
+  .contact h2 em{color:var(--red)}
+  .contact p{font-size:calc(17px * var(--type-scale));line-height:1.7;opacity:.88;max-width:52ch}
+  .contact .lines{display:flex;flex-direction:column;gap:4px;margin-top:10px}
+  .contact .lines a{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--line);transition:color .2s, padding .2s}
+  .contact .lines a:hover{color:var(--red);padding-left:12px}
+  .contact .lines .k{font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.06em;font-size:calc(13px * var(--type-scale));opacity:.55}
+  .contact .lines .v{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:calc(20px * var(--type-scale))}
+  @media (max-width:900px){.contact{grid-template-columns:1fr}}
+
+  /* FOOTER */
+  footer{background:#000;padding:40px 28px;border-top:2px solid var(--red);color:#bbb;font-size:12px;letter-spacing:.06em}
+  footer .row{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  footer img{height:28px}
+
+  /* TWEAKS PANEL */
+  #tweaks-panel{position:fixed;bottom:20px;right:20px;z-index:100;background:#0c0c0c;border:1px solid var(--line);padding:20px 20px 18px;width:300px;font-family:var(--body);display:none;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  #tweaks-panel h5{margin:0 0 14px;font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.08em;color:var(--red);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+  #tweaks-panel h5 .x{cursor:pointer;opacity:.6;font-size:14px}
+  #tweaks-panel h5 .x:hover{opacity:1}
+  #tweaks-panel .field{margin-bottom:14px}
+  #tweaks-panel .field label{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:6px;color:#fff}
+  #tweaks-panel .opts{display:flex;gap:6px}
+  #tweaks-panel .opts button{flex:1;padding:8px 6px;background:transparent;border:1px solid var(--line);color:#fff;font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:11px;letter-spacing:.06em;cursor:pointer;transition:all .15s}
+  #tweaks-panel .opts button:hover{border-color:#fff}
+  #tweaks-panel .opts button.on{background:var(--red);border-color:var(--red)}
+  #tweaks-panel input[type=range]{width:100%;accent-color:var(--red)}
+  #tweaks-panel .val{float:right;font-family:ui-monospace,monospace;font-size:11px;opacity:.6}
+
+  /* ANCHOR OFFSET */
+  .anchor{position:absolute;top:-80px}
+
+  /* ================================================= */
+  /* ================ MOBILE (≤ 800px) ================ */
+  /* ================================================= */
+  @media (max-width: 800px){
+    /* NAV — hamburger drawer */
+    .nav{padding:14px 18px;flex-wrap:wrap}
+    .nav .brand img{height:26px}
+    .nav-toggle{display:flex;order:3;margin-left:12px}
+    .nav .cta{order:2;padding:7px 11px;font-size:11px}
+    .nav .links{
+      order:10;
+      display:none;
+      flex-direction:column;
+      width:100%;
+      gap:0;
+      margin-top:14px;
+      padding-top:14px;
+      border-top:1px solid var(--line);
+    }
+    .nav[data-menu-open="true"] .links{display:flex}
+    .nav .links a{padding:14px 0;font-size:15px;opacity:.9;border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav .links a:last-child{border-bottom:0}
+
+    /* HERO */
+    .hero .content{padding:18vh 20px 80px}
+    .hero.variant-a .hero-name{font-size:clamp(64px, 20vw, 140px)}
+    .hero.variant-a .strap{gap:12px;margin-top:12px}
+    .hero.variant-a .strap .bar{width:40px;height:3px}
+    .hero.variant-a .strap .role{font-size:14px}
+    .hero.variant-a .meta{grid-template-columns:repeat(2,1fr);gap:16px;margin-top:30px;padding-top:18px}
+    .hero.variant-a .meta .v{font-size:14px}
+    .hero.variant-a .meta .k{font-size:10px}
+    .hero.variant-b .content{grid-template-columns:1fr;gap:30px;padding:16vh 20px 60px}
+    .hero.variant-b .hero-name{font-size:clamp(54px, 14vw, 110px)}
+    .hero.variant-b .meta{gap:18px}
+    .hero.variant-c .content{padding:16vh 20px 80px}
+    .hero.variant-c .hero-name{font-size:clamp(54px, 16vw, 130px)}
+    .hero.variant-c .sub{font-size:12px;letter-spacing:.12em;margin-top:18px}
+    .scrollhint{bottom:18px;font-size:10px}
+    .scrollhint::before{width:26px}
+
+    /* TICKER */
+    .ticker-inner{gap:40px;padding:10px 0}
+    .ticker-inner span{font-size:14px}
+    .ticker-inner span::after{margin-left:40px}
+
+    /* SECTIONS — reduce heavy padding */
+    section{padding:70px 18px}
+    .wrap{max-width:100%}
+    .section-head{flex-direction:column;align-items:flex-start;gap:8px;padding-bottom:14px;margin-bottom:36px}
+    .section-head .l{gap:14px}
+    .section-head .title{font-size:28px}
+    .section-head .num{font-size:11px;padding:6px 10px}
+    .section-head .year{font-size:11px}
+
+    /* INTRO */
+    .intro{grid-template-columns:1fr;gap:30px}
+    .intro h2{font-size:40px;margin:12px 0 16px}
+    .intro p{font-size:15px;line-height:1.65}
+    .intro .panel{padding:20px}
+
+    /* DIVIDER */
+    .divider{flex-wrap:wrap;padding:24px 18px;gap:14px}
+    .divider .t{font-size:16px;line-height:1.15;flex:1 1 100%;order:3}
+    .divider .n{order:1;font-size:11px;padding:6px 10px}
+    .divider .y{order:2;margin-left:auto;font-size:11px}
+    .divider img{max-height:26px!important;order:4}
+
+    /* CHAPTERS */
+    .chapter,.chapter.flip{grid-template-columns:1fr;gap:26px}
+    .chapter.flip .side,.chapter.flip .media{order:initial}
+    .chapter .side h3{font-size:40px}
+    .chapter .side p{font-size:15px;line-height:1.65}
+    .chapter .side .meta{grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px;padding-top:16px}
+    .chapter .side .tracks{gap:5px;margin-top:16px}
+    .chapter .side .tracks span{padding:5px 8px;font-size:10px}
+    .media .row{gap:8px}
+    .media figcaption{font-size:10px}
+
+    /* STORY VIDEO */
+    #story-video{padding:70px 18px!important}
+    #story-video h2{font-size:34px!important}
+
+    /* ENGINEERING */
+    .eng-hero{grid-template-columns:1fr;gap:30px;margin-bottom:40px}
+    .eng-hero h3{font-size:44px;margin:0 0 16px}
+    .eng-hero p{font-size:15px;line-height:1.65}
+    .eng-stack{grid-template-columns:repeat(2,1fr);gap:10px;margin-top:30px}
+    .eng-stack .card{padding:16px}
+    .eng-stack .card p{font-size:12px}
+    .eng-media{grid-template-columns:1fr;gap:10px}
+    .eng-cta{gap:10px}
+    .btn{padding:11px 16px;font-size:12px}
+
+    /* ECLIPSE */
+    .eclipse{grid-template-columns:1fr;gap:30px}
+    .eclipse .copy h3{font-size:40px;margin:10px 0 14px}
+    .eclipse .copy p{font-size:15px;line-height:1.65}
+    .eclipse .logo-box{padding:30px;aspect-ratio:4/3}
+
+    /* EXCAMPS */
+    .excamps{grid-template-columns:1fr;gap:30px}
+    .excamps .card{padding:28px}
+    .excamps .card .quote{font-size:24px;line-height:1.1}
+    .excamps .card p{font-size:14px;line-height:1.6}
+    .excamps .aside h3{font-size:30px}
+    .excamps .aside p{font-size:15px;line-height:1.65}
+
+    /* CONTACT */
+    .contact{grid-template-columns:1fr;gap:30px}
+    .contact h2{font-size:54px;line-height:.88;margin:0 0 14px}
+    .contact p{font-size:15px;line-height:1.65}
+    .contact .lines a{padding:16px 0}
+    .contact .lines a:hover{padding-left:0}
+    .contact .lines .v{font-size:15px}
+    .contact .lines .k{font-size:11px}
+
+    /* FOOTER */
+    footer{padding:28px 18px}
+    footer .row{flex-direction:column;align-items:flex-start;gap:14px}
+    footer img{height:22px}
+
+    /* TWEAKS PANEL */
+    #tweaks-panel{bottom:12px;right:12px;left:12px;width:auto;padding:16px}
+  }
+
+  /* ============ EXTRA SMALL (≤ 400px) ============ */
+  @media (max-width: 400px){
+    .nav{padding:12px 14px}
+    section{padding:56px 14px}
+    .hero.variant-a .hero-name{font-size:clamp(56px, 21vw, 110px)}
+    .intro h2{font-size:34px}
+    .chapter .side h3{font-size:34px}
+    .eng-hero h3{font-size:38px}
+    .eclipse .copy h3{font-size:34px}
+    .contact h2{font-size:46px}
+    .section-head .title{font-size:24px}
+    .eng-stack{grid-template-columns:1fr}
+    .chapter .side .meta{grid-template-columns:1fr 1fr}
+    .hero.variant-a .meta{grid-template-columns:1fr 1fr}
+    .divider .t{font-size:14px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" data-menu-open="false" id="mainNav">
+  <div class="brand">
+    <img src="assets/logo-full-white.png" alt="Griffin Yellin" />
+  </div>
+  <div class="links">
+    <a href="#story">Story</a>
+    <a href="#skip">Skip Barber</a>
+    <a href="#jh">Jay Howard</a>
+    <a href="#enve">ENVE</a>
+    <a href="#mts">Engineering</a>
+    <a href="#eclipse">Eclipse</a>
+    <a href="#excamps">ExCamps</a>
+  </div>
+  <a href="#contact" class="cta">Contact</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero variant-a" id="hero">
+  <video autoplay muted loop playsinline preload="metadata">
+    <source src="https://video.wixstatic.com/video/ac240c_9199118851e84ca0a8e96e3f0c1fd9c9/1080p/mp4/file.mp4" type="video/mp4" />
+  </video>
+  <div class="vig"></div>
+  <div class="content hero-a">
+    <div class="tag" style="color:var(--red)">New York · Carmel, IN · The Road to Indy</div>
+    <h1 class="hero-name">
+      <span class="r1">Griffin</span>
+      <span class="r2">Yellin</span>
+    </h1>
+    <div class="strap">
+      <div class="bar"></div>
+      <div class="role">Driver <span class="slash">/</span> Race Engineer <span class="slash">/</span> Data</div>
+    </div>
+    <div class="meta">
+      <div><div class="k">Discipline</div><div class="v">Formula 4 · USF Pro</div></div>
+      <div><div class="k">Engineering</div><div class="v">MTS · DAG Graduate</div></div>
+      <div><div class="k">Sim</div><div class="v">Eclipse Competition</div></div>
+      <div><div class="k">Training</div><div class="v">PitFit Daily</div></div>
+    </div>
+  </div>
+  <div class="hero-b" style="display:none"></div>
+  <div class="hero-c" style="display:none"></div>
+  <div class="scrollhint">Scroll · The Story</div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner" id="tick">
+    <span>Sebring International Raceway</span>
+    <span>Road America</span>
+    <span>Indianapolis Motor Speedway</span>
+    <span>Portland International Raceway</span>
+    <span>The Thermal Club</span>
+    <span>Putnam Park</span>
+    <span>Sebring International Raceway</span>
+    <span>Road America</span>
+    <span>Indianapolis Motor Speedway</span>
+    <span>Portland International Raceway</span>
+    <span>The Thermal Club</span>
+    <span>Putnam Park</span>
+  </div>
+</div>
+
+<!-- ============ STORY INTRO ============ -->
+<section class="sec-black" id="story">
+  <span class="anchor" id="story-anchor"></span>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="l">
+        <span class="num">00</span>
+        <span class="title">The Story</span>
+      </div>
+      <span class="year">2022 — Present</span>
+    </div>
+    <div class="intro">
+      <div>
+        <div class="tag eyebrow">From grief to the grid</div>
+        <h2>A driver built in a cockpit. An engineer built <em>in the data.</em></h2>
+        <p>Born and raised in New York City, I found racing in 2022 — a refuge from the grief of losing my father. What started as escape became obsession, then discipline, then career.</p>
+        <p>Four years later I've competed on the Road to Indy ladder with Jay Howard Driver Development, tested with ENVE Motorsports in USF Pro, and graduated the Motorsport Technical School's DAG track as a Performance Engineer. I'm now in Carmel, Indiana, living and breathing the sport from both sides of the garage wall — building the car, driving the car, reading its data, and chasing the only goal that still matters: a professional seat on the way to the NTT INDYCAR Series, and becoming the first Puerto Rican to do so.</p>
+      </div>
+      <div class="panel">
+        <h4>Fact Sheet</h4>
+        <ul>
+          <li><span class="k">Born</span><span class="v">New York City</span></li>
+          <li><span class="k">Based</span><span class="v">Carmel, Indiana</span></li>
+          <li><span class="k">Education</span><span class="v">Dalton · MTS DAG</span></li>
+          <li><span class="k">Seat Time</span><span class="v">F4 · USF · SIM</span></li>
+          <li><span class="k">Goal</span><span class="v" style="color:var(--red)">NTT INDYCAR</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKIP BARBER ============ -->
+<div class="divider"><span class="n">01</span><span class="t">Skip Barber Racing School — The Beginning</span><span class="y">2023 — 2024</span></div>
+<section class="sec-black" id="skip">
+  <div class="wrap">
+    <div class="chapter">
+      <div class="side">
+        <div class="era">Chapter One</div>
+        <h3>Learn <em style="color:var(--red)">to&nbsp;drive.</em></h3>
+        <div class="sub">Skip Barber Formula Series · Car #30</div>
+        <p>Sebring was where the helmet went on for the first time — and where I decided not to take it off. A year after losing my dad, I walked into Skip Barber with no ladder-series background and every reason to feel out of place. The paddock didn't care. The car didn't care. Every lap I got better, and every session the grief got quieter.</p>
+        <p>Skip Barber's formula curriculum taught me the fundamentals — braking cadence, rotation, reference points, racecraft — and gave me a full season of wheel-to-wheel across some of the hardest circuits in the country. By the end of it, this wasn't therapy anymore. It was a career.</p>
+        <div class="meta">
+          <div><div class="k">Series</div><div class="v">Skip Barber Formula</div></div>
+          <div><div class="k">Car</div><div class="v">Formula 4 · #30</div></div>
+          <div><div class="k">Seasons</div><div class="v">2023 — 2024</div></div>
+        </div>
+        <div class="tracks">
+          <span>Sebring Intl.</span><span>NOLA Motorsports Park</span><span>Circuit of the Americas</span><span>VIR</span><span>Road America</span><span>Lime Rock Park</span>
+        </div>
+      </div>
+      <div class="media">
+        <div class="big"><img src="assets/sebring1.jpg" alt="Sebring — car #30" /></div>
+        <div class="row">
+          <div class="t"><img src="assets/sebring2.jpg" alt="Sebring" /></div>
+          <div class="t"><img src="assets/sb-new.jpg" alt="Skip Barber paddock" /></div>
+        </div>
+        <figcaption>Skip Barber Racing School · F4 · 2023–24</figcaption>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY VIDEO ============ -->
+<section class="sec-black" id="story-video" style="padding:120px 32px">
+  <div class="wrap" style="max-width:1200px">
+    <div class="tag eyebrow" style="color:var(--red);margin-bottom:18px;font-family:ui-monospace,monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase">The story, in my own words</div>
+    <h2 style="font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:clamp(40px,6vw,84px);line-height:.92;margin:0 0 28px;color:#fff">Watch <em style="color:var(--red);font-style:italic">the why.</em></h2>
+    <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;border:1px solid rgba(255,255,255,.12);overflow:hidden">
+      <video controls playsinline preload="metadata" poster="assets/sebring1.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
+        <source src="https://video.wixstatic.com/video/ac240c_9199118851e84ca0a8e96e3f0c1fd9c9/1080p/mp4/file.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:20px;margin-top:14px;font-family:ui-monospace,monospace;font-size:12px;opacity:.55;letter-spacing:.08em;text-transform:uppercase;color:#fff">
+      <span>Griffin Yellin · A racing story</span><span>Sound on</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JAY HOWARD ============ -->
+<div class="divider" style="display:flex;align-items:center;gap:20px"><span class="n">02</span><span class="t">Jay Howard Driver Development — The Ladder</span><img src="assets/jhdd-logo.png" alt="JHDD" style="height:34px;width:auto;margin-left:auto;filter:invert(0)" /><span class="y">2024 — 2025</span></div>
+<section class="sec-paper" id="jh">
+  <div class="wrap">
+    <div class="chapter flip">
+      <div class="side">
+        <div class="era">Chapter Two</div>
+        <h3>Road <em>to Indy.</em></h3>
+        <div class="sub">USF Pro Championships · #7 JHDD</div>
+        <p>Jay Howard Driver Development put me on the ladder. Road America in the rain. The IMS Combine under empty grandstands. Portland, Putnam, Mid-Ohio, NOLA — a field of drivers every bit as hungry as me. For the first time I wasn't a student, I was a racing driver with a data engineer, a setup sheet, and a qualifying session that mattered.</p>
+        <p>What I took from JHDD is something every real ladder team teaches you by force: how to communicate. How to turn a feeling in Turn 5 into a spring rate on a sheet of paper. How to sit down after the session and defend your in-car reasoning to an engineer who has three sessions of data to disagree with you. That loop — feel, data, conversation, change, lap — is the loop I still run today, just from the other side of the desk.</p>
+        <div class="meta">
+          <div><div class="k">Team</div><div class="v">JHDD</div></div>
+          <div><div class="k">Series</div><div class="v">USF Pro Champ.</div></div>
+          <div><div class="k">Role</div><div class="v">Driver</div></div>
+        </div>
+        <div class="tracks">
+          <span>Putnam Park</span><span>Road America</span><span>Portland Intl.</span><span>Indianapolis Motor Speedway</span><span>Mid-Ohio</span><span>NOLA Motorsports Park</span>
+        </div>
+      </div>
+      <div class="media">
+        <div class="big"><img src="assets/rdam4.jpg" alt="Road America" /></div>
+        <div class="row">
+          <div class="t"><img src="assets/ims3.jpg" alt="IMS" /></div>
+          <div class="t"><img src="assets/portland1.jpg" alt="Portland" /></div>
+          <div class="t"><img src="assets/rdam7.jpg" alt="Road America" /></div>
+        </div>
+        <figcaption>Road America · IMS · Portland · JHDD USF Pro · 2024–25</figcaption>
+      </div>
+    </div>
+
+    <!-- second row -->
+    <div class="chapter" style="margin-top:80px">
+      <div class="media">
+        <div class="big"><img src="assets/irp-6839.jpg" alt="IRP Oval spotter" /></div>
+        <div class="row">
+          <div class="t"><img src="assets/irp-6833.jpg" alt="IRP Oval" /></div>
+          <div class="t"><img src="assets/ims4.jpg" alt="IMS Combine" /></div>
+          <div class="t"><img src="assets/rdam12.jpg" alt="Road America" /></div>
+        </div>
+        <figcaption>"The driver-engineer loop started here." — IRP Oval, May 2025</figcaption>
+      </div>
+      <div class="side">
+        <div class="era">Role · Spotter</div>
+        <h3 style="font-size:clamp(36px,5vw,72px)">Trackside, <em>one weekend.</em></h3>
+        <div class="sub">USF Pro Championships · IRP Oval · May 2025</div>
+        <p>In May 2025 I stayed with JHDD as spotter for the IRP Oval round — calling car position and incident data live to the driver and engineering stand. Standing above an oval rewires how you see racing: you stop watching cars and you start watching <em>space</em>. It's a skill I now apply to every coaching job I take and every strategy call I make from the pit box.</p>
+        <div class="meta">
+          <div><div class="k">Station</div><div class="v">Trackside</div></div>
+          <div><div class="k">Event</div><div class="v">IRP Oval · May '25</div></div>
+          <div><div class="k">Comms-to</div><div class="v">Driver + Eng. Stand</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENVE ============ -->
+<div class="divider"><span class="n">03</span><span class="t">ENVE Motorsports — USF Pro Test &amp; Coaching</span><span class="y">2024 — 2025</span></div>
+<section class="sec-black" id="enve">
+  <div class="wrap">
+    <div class="chapter">
+      <div class="side">
+        <div class="era">Chapter Three</div>
+        <h3>Test. <em style="color:var(--red)">Develop.</em> Repeat.</h3>
+        <div class="sub">ENVE Motorsports · Thermal Club</div>
+        <p>As Test Driver for ENVE Motorsports, I spent 2024 and 2025 doing the work most people don't see: multi-session days at The Thermal Club, running structured setup sweeps and delivering the kind of feedback an engineering team can actually build on. Damper changes. Ride-height deltas. Aero balance. Tire-temp windows. Session after session.</p>
+        <p>Thermal taught me precision. You don't get points for a hero lap in a test — you get points for a clean, repeatable lap that isolates one variable. In May 2025 I joined the ENVE USF Pro program as a driver <em>coach</em> at the IRP Oval, bringing driver insight back to the pit stand for a full race weekend. Both seats. Same car. Same sport.</p>
+        <div class="meta">
+          <div><div class="k">Role</div><div class="v">Test Driver · Coach</div></div>
+          <div><div class="k">Program</div><div class="v">USF Pro</div></div>
+          <div><div class="k">Venues</div><div class="v">Thermal · IRP Oval</div></div>
+        </div>
+      </div>
+      <div class="media">
+        <div class="big"><img src="assets/thermal1.jpg" alt="Thermal" /></div>
+        <div class="row">
+          <div class="t"><img src="assets/thermal2.jpg" alt="Thermal" /></div>
+          <div class="t"><img src="assets/thermal3.jpg" alt="Thermal" /></div>
+          <div class="t"><img src="assets/thermal4.jpg" alt="Thermal" /></div>
+        </div>
+        <figcaption>The Thermal Club · ENVE Motorsports Test Program · 2024–25</figcaption>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MTS / ENGINEERING ============ -->
+<div class="divider"><span class="n">04</span><span class="t">Motorsport Technical School — Race Engineer</span><span class="y">2025 — 2026</span></div>
+<section class="sec-paper" id="mts">
+  <div class="wrap">
+    <div class="eng-hero">
+      <div>
+        <div class="tag" style="color:var(--red)">Lead Race Engineer · DAG Graduate</div>
+        <h3>The other side <em>of the wall.</em></h3>
+        <p>I graduated the Motorsport Technical School's DAG (Data Acquisition &amp; Analysis) track yesterday, April 18, 2026, in Carmel, Indiana — an intensive race-engineering program covering data acquisition, vehicle dynamics, tire science, aero balance, suspension, powertrain analysis and race strategy on the Ligier JSF4 platform.</p>
+        <p>I led the team as Race Engineer for our F4 track day at Putnam Park: I rebuilt and reorganized the wiring loom and harness on the Ligier JSF4, serviced all engine and chassis connectors, contributed directly to a full engine swap, and monitored HPD engine parameters during first crank. I sourced the full technical manual library (HPD, Sadev, JRi, AIM, Tilton, GEMS) and worked directly with manufacturers through my personal industry network to resolve engineering questions in real time.</p>
+        <p>I also built the team's entire engineering document stack from scratch in Excel — run plan, setup sheet, driver procedure, lap tracker, tire tracker, engine break-in tracker, spare parts manifest, and driver feedback sheet — plus a live setup configuration app at <a href="https://gysetupconfig.netlify.app" style="color:var(--red);border-bottom:1px solid var(--red)">gysetupconfig.netlify.app</a>.</p>
+        <div class="eng-cta">
+          <a class="btn primary" href="assets/GriffinYellin_Resume.pdf" download><span>Download Résumé</span><span class="arr">↓</span></a>
+          <a class="btn" href="https://gysetupconfig.netlify.app" target="_blank"><span>Live Setup App</span><span class="arr">↗</span></a>
+        </div>
+      </div>
+      <div>
+        <div class="eng-media">
+          <div class="t"><img src="assets/mts-a.jpg" alt="MTS · race engineering" /></div>
+          <div class="t small"><img src="assets/mts-b.jpg" alt="MTS · Ligier JSF4" /></div>
+          <div class="t small"><img src="assets/mts-c.jpg" alt="MTS · engine swap" /></div>
+          <div class="t"><img src="assets/mts-d.jpg" alt="MTS · Putnam Park" /></div>
+        </div>
+        <figcaption style="font-family:ui-monospace,monospace;font-size:11px;opacity:.6;margin-top:10px;letter-spacing:.08em;text-transform:uppercase">Motorsport Technical School · DAG · Ligier JSF4 · Putnam Park</figcaption>
+      </div>
+    </div>
+
+    <div class="eng-stack">
+      <div class="card">
+        <h5>Data &amp; DAQ</h5>
+        <p>GEMS ECU · Cosworth Pi Toolbox · AIM Systems · data &amp; math channels · iRacing · custom tool development</p>
+      </div>
+      <div class="card">
+        <h5>Vehicle Dynamics</h5>
+        <p>Tire science · suspension setup · aero balance · powertrain · race strategy · LSTM bicycle model</p>
+      </div>
+      <div class="card">
+        <h5>Mech. &amp; Electrical</h5>
+        <p>Engine build · wiring harness · connector service · ECU startup · HPD F4 · Ligier JSF4</p>
+      </div>
+      <div class="card">
+        <h5>Systems</h5>
+        <p>PC hardware (CPU/GPU) · sim rig build · Microsoft Suite · PitFit daily training (IndyCar level)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ECLIPSE ============ -->
+<div class="divider"><span class="n">05</span><span class="t">Eclipse Competition — Elite Sim Racing</span><span class="y">PRESENT</span></div>
+<section class="sec-black" id="eclipse">
+  <div class="wrap">
+    <div class="eclipse">
+      <div class="copy">
+        <div class="badge"><span class="d"></span> Active Engineer</div>
+        <h3>Setup work for <em>elite sim</em> teams.</h3>
+        <p>Off the physical grid, I'm a setup engineer for Eclipse Competition — an elite sim-racing team competing at the top of iRacing. My job: develop, test and validate the setups that put Eclipse drivers on the front row of the hardest online series in motorsport.</p>
+        <p>Eclipse is not a bedroom roster. The lineup is built almost entirely of real-world racers — people who know what a car is actually doing on track and can give the kind of feedback an engineer can build on. That's the reason the setup work matters here: it's the same DAQ, the same tire-model questions, the same damper-vs-spring conversations — just with a different telemetry pipe. Every hour here feeds directly into the real-world engineering I do at the track, and vice versa.</p>
+        <div class="eng-cta">
+          <a class="btn on-dark" href="#contact"><span>Engineering Inquiries</span><span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="logo-box">
+        <img src="assets/eclipse-white.png" alt="Eclipse Competition" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXCAMPS ============ -->
+<div class="divider"><span class="n">06</span><span class="t">Why I Race — ExCamps</span><span class="y">EXPERIENCE CAMPS</span></div>
+<section class="sec-paper" id="excamps">
+  <div class="wrap">
+    <div class="excamps">
+      <div class="card">
+        <div class="tag" style="color:var(--red)">This is the why.</div>
+        <p class="quote">ExCamps gave me the tools to grieve <em>when no one else was</em> — and they do it for thousands of young people across the country.</p>
+        <p>Racing gave me somewhere to put the grief. ExCamps gave me the permission to feel it first. If any part of my story resonates with you, this is where that story actually starts.</p>
+        <a class="btn on-dark" href="https://experiencecamps.org/" target="_blank" rel="noopener"><span>Visit ExperienceCamps.org</span><span class="arr">↗</span></a>
+      </div>
+      <div class="aside">
+        <h4>A Cause I Stand Behind</h4>
+        <h3>No young person should grieve alone.</h3>
+        <p>Experience Camps is a free, one-week program for kids who've lost someone close to them. After my father passed in 2022, they were the first place where I didn't have to explain what I was feeling. Racing is the result. This is the origin.</p>
+        <p style="opacity:.6;font-size:14px">If you're a potential sponsor or partner, I donate a portion of every sponsorship contribution to ExCamps. Details on request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<div class="divider"><span class="n">07</span><span class="t">Let's talk — Sponsors · Partners · Teams</span><span class="y">CARMEL, IN</span></div>
+<section class="sec-black" id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <div>
+        <div class="tag" style="color:var(--red)">Open for sponsorship, engineering, coaching</div>
+        <h2>Build <em>something</em> with me.</h2>
+        <p>Driver, race engineer and data specialist. Based in Carmel, Indiana. Available for seats, engineering roles, test days, coaching, sim-team contracts and sponsor partnerships. The fastest way to reach me is email.</p>
+        <div class="eng-cta" style="margin-top:28px">
+          <a class="btn primary" href="assets/GriffinYellin_Resume.pdf" download><span>Download Résumé</span><span class="arr">↓</span></a>
+        </div>
+      </div>
+      <div class="lines">
+        <a href="mailto:griffin@griffinyellinracing.com"><span class="k">Email</span><span class="v">griffin@griffinyellinracing.com</span></a>
+        <a href="https://instagram.com/griffinyellin" target="_blank"><span class="k">Instagram</span><span class="v">@griffinyellin</span></a>
+        <a href="https://www.linkedin.com/in/griffin-yellin-39a463252/" target="_blank"><span class="k">LinkedIn</span><span class="v">griffin-yellin</span></a>
+        <a href="tel:+19175150451"><span class="k">Phone</span><span class="v">917 · 515 · 0451</span></a>
+        <a><span class="k">Based</span><span class="v">Carmel, Indiana</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <img src="assets/logo-full-white.png" alt="Griffin Yellin" />
+    <div>© 2026 Griffin Yellin Racing · Driver · Engineer · Data</div>
+    <div style="display:flex;gap:20px">
+      <a href="mailto:griffin@griffinyellinracing.com">Email</a>
+      <a href="https://instagram.com/griffinyellin" target="_blank">IG</a>
+      <a href="https://www.linkedin.com/in/griffin-yellin-39a463252/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ TWEAKS ============ -->
+<div id="tweaks-panel">
+  <h5>Tweaks <span class="x" onclick="document.getElementById('tweaks-panel').style.display='none'">✕</span></h5>
+  <div class="field">
+    <label>Hero Variant</label>
+    <div class="opts" id="opt-hero">
+      <button data-v="a" class="on">A · Giant</button>
+      <button data-v="b">B · Split</button>
+      <button data-v="c">C · Plate</button>
+    </div>
+  </div>
+  <div class="field">
+    <label>Typography Scale <span class="val" id="scale-val">1.00</span></label>
+    <input type="range" id="scale-slider" min="0.85" max="1.2" step="0.05" value="1" />
+  </div>
+</div>
+
+<script>
+  const TWEAKS = /*EDITMODE-BEGIN*/{
+    "heroVariant": "b",
+    "typeScale": 1.05
+  }/*EDITMODE-END*/;
+
+  // ---- Hero variant rendering ----
+  const heroEl = document.querySelector('.hero');
+  function renderHero(v){
+    heroEl.classList.remove('variant-a','variant-b','variant-c');
+    heroEl.classList.add('variant-' + v);
+    const content = heroEl.querySelector('.content');
+    if (v === 'a') {
+      content.innerHTML = `
+        <div class="tag" style="color:var(--red)">New York · Carmel, IN · The Road to Indy</div>
+        <h1 class="hero-name">
+          <span class="r1">Griffin</span>
+          <span class="r2">Yellin</span>
+        </h1>
+        <div class="strap">
+          <div class="bar"></div>
+          <div class="role">Driver <span class="slash">/</span> Race Engineer <span class="slash">/</span> Data</div>
+        </div>
+        <div class="meta">
+          <div><div class="k">Discipline</div><div class="v">Formula 4 · USF Pro</div></div>
+          <div><div class="k">Engineering</div><div class="v">MTS · DAG Graduate</div></div>
+          <div><div class="k">Sim</div><div class="v">Eclipse Competition</div></div>
+          <div><div class="k">Training</div><div class="v">PitFit Daily</div></div>
+        </div>`;
+    } else if (v === 'b') {
+      content.innerHTML = `
+        <div>
+          <div class="tag" style="color:var(--red)">Driver · Engineer · Data</div>
+          <h1 class="hero-name">
+            <span class="r1">Griffin</span>
+            <span class="r2">Yellin</span>
+          </h1>
+          <div class="meta">
+            <div><div class="k">Discipline</div><div class="v">Formula 4 · USF Pro</div></div>
+            <div><div class="k">Engineering</div><div class="v">MTS · DAG</div></div>
+            <div><div class="k">Based</div><div class="v">Carmel, Indiana</div></div>
+          </div>
+        </div>
+        <div class="sidecard">
+          <h4><span class="dot"></span>Now</h4>
+          <p>Lead Race Engineer at Motorsport Technical School. Setup engineer at Eclipse Competition. Open for seats, engineering roles, coaching, and sponsor partnerships.</p>
+          <p style="margin-top:14px;opacity:.6;font-size:12px;font-family:ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase">Scroll for the story →</p>
+        </div>`;
+    } else {
+      content.innerHTML = `
+        <div class="plate">Griffin Yellin Racing · Est. 2022</div>
+        <h1 class="hero-name">
+          <span class="r1">Griffin</span>
+          <span class="r2">Yellin</span>
+        </h1>
+        <div class="sub">Driver <span>/</span> Race Engineer <span>/</span> Data</div>`;
+    }
+  }
+  renderHero(TWEAKS.heroVariant);
+
+  // ---- Type scale ----
+  function applyScale(s){ document.documentElement.style.setProperty('--type-scale', s); }
+  applyScale(TWEAKS.typeScale);
+
+  // ---- Tweaks wiring ----
+  document.querySelectorAll('#opt-hero button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('#opt-hero button').forEach(b=>b.classList.remove('on'));
+      btn.classList.add('on');
+      TWEAKS.heroVariant = btn.dataset.v;
+      renderHero(btn.dataset.v);
+      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{heroVariant: btn.dataset.v}}, '*');
+    });
+  });
+  // set current "on" for variant
+  document.querySelectorAll('#opt-hero button').forEach(b=>{
+    b.classList.toggle('on', b.dataset.v === TWEAKS.heroVariant);
+  });
+  const scaleSlider = document.getElementById('scale-slider');
+  const scaleVal = document.getElementById('scale-val');
+  scaleSlider.value = TWEAKS.typeScale;
+  scaleVal.textContent = Number(TWEAKS.typeScale).toFixed(2);
+  scaleSlider.addEventListener('input', e=>{
+    const v = parseFloat(e.target.value);
+    TWEAKS.typeScale = v;
+    scaleVal.textContent = v.toFixed(2);
+    applyScale(v);
+    window.parent.postMessage({type:'__edit_mode_set_keys', edits:{typeScale: v}}, '*');
+  });
+
+  // ---- Edit mode registration (register listener first, then announce) ----
+  window.addEventListener('message', (e)=>{
+    const d = e.data || {};
+    if (d.type === '__activate_edit_mode') {
+      document.getElementById('tweaks-panel').style.display = 'block';
+    } else if (d.type === '__deactivate_edit_mode') {
+      document.getElementById('tweaks-panel').style.display = 'none';
+    }
+  });
+  window.parent.postMessage({type:'__edit_mode_available'}, '*');
+
+  // Smooth scroll for in-page links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const t = document.querySelector(id);
+        if (t) { e.preventDefault(); window.scrollTo({top: t.offsetTop - 40, behavior: 'smooth'}); }
+      }
+    });
+  });
+
+  // ---- Mobile nav hamburger ----
+  (function(){
+    const nav = document.getElementById('mainNav');
+    const btn = document.getElementById('navToggle');
+    if (!nav || !btn) return;
+    const setOpen = (open) => {
+      nav.setAttribute('data-menu-open', open ? 'true' : 'false');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    btn.addEventListener('click', () => {
+      const isOpen = nav.getAttribute('data-menu-open') === 'true';
+      setOpen(!isOpen);
+    });
+    // Close drawer after tapping a link
+    nav.querySelectorAll('.links a, .cta').forEach(a => {
+      a.addEventListener('click', () => setOpen(false));
+    });
+    // Close if window resizes to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 800) setOpen(false);
+    });
+  })();
+</script>
+</body>
+</html>

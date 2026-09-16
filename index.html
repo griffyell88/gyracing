@@ -3,8 +3,23 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Griffin Yellin — Driver · Engineer</title>
+<title>Griffin Yellin — Race Engineer · Data · Driver</title>
+<meta name="description" content="Griffin Yellin — race engineer and data specialist based in Carmel, Indiana. Motorsport Technical School DAG graduate (top of class), F4 / USF Pro Championships race engineering, Eclipse Competition setup engineer, former Road to Indy driver." />
+<link rel="canonical" href="https://gyracing.com/" />
+<meta name="theme-color" content="#0A0A0A" />
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="Griffin Yellin — Race Engineer · Data · Driver" />
+<meta property="og:description" content="Race engineer and data specialist in Carmel, Indiana. MTS DAG graduate, F4 / USF Pro Championships engineering, Eclipse Competition setup engineer, former Road to Indy driver." />
+<meta property="og:url" content="https://gyracing.com/" />
+<meta property="og:image" content="https://gyracing.com/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="assets/logo-mark-red.png" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Griffin Yellin","url":"https://gyracing.com/","email":"mailto:griffyellin@outlook.com","jobTitle":"Race Engineer","address":{"@type":"PostalAddress","addressLocality":"Carmel","addressRegion":"IN","addressCountry":"US"},"alumniOf":[{"@type":"EducationalOrganization","name":"Motorsport Technical School"},{"@type":"EducationalOrganization","name":"The Dalton School"}],"sameAs":["https://instagram.com/griffinyellin","https://www.linkedin.com/in/griffin-yellin-39a463252/","https://eclipsecompetition.com/"]}
+</script>
 <style>
   @font-face {
     font-family: 'Speeday';
@@ -29,14 +44,23 @@
     --line-dark:rgba(0,0,0,.12);
     --display: 'Speeday', 'Arial Black', 'Helvetica Neue', Impact, system-ui, sans-serif;
     --body: 'GYBody', 'Inter', ui-sans-serif, system-ui, sans-serif;
-    --type-scale: 1;
+    --type-scale: 1.05;
   }
 
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--black);color:#fff;font-family:var(--body);-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth}
   img{display:block;max-width:100%}
   a{color:inherit;text-decoration:none}
   ::selection{background:var(--red);color:#fff}
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px}
+  .skip{position:absolute;left:-999px;top:12px;z-index:200;background:var(--red);color:#fff;padding:10px 14px;font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.08em}
+  .skip:focus{left:12px}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .ticker-inner{animation:none}
+    .eclipse .badge .d{animation:none}
+  }
 
   /* Display type */
   .display{font-family:var(--display);letter-spacing:-.005em;line-height:.86;text-transform:uppercase;font-style:italic}
@@ -62,7 +86,7 @@
 
   /* ====== HERO ====== */
   .hero{position:relative;min-height:100vh;overflow:hidden;background:#000}
-  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;background:#000 url('assets/hero-poster.jpg') center/cover no-repeat}
   .hero .vig{position:absolute;inset:0;background:
     radial-gradient(120% 80% at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 70%, #000 100%),
     linear-gradient(180deg, rgba(10,10,10,.5) 0%, rgba(10,10,10,0) 20%, rgba(10,10,10,0) 60%, #000 100%);}
@@ -233,7 +257,7 @@
   .contact h2 em{color:var(--red)}
   .contact p{font-size:calc(17px * var(--type-scale));line-height:1.7;opacity:.88;max-width:52ch}
   .contact .lines{display:flex;flex-direction:column;gap:4px;margin-top:10px}
-  .contact .lines a{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--line);transition:color .2s, padding .2s}
+  .contact .lines a,.contact .lines .static{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--line);transition:color .2s, padding .2s}
   .contact .lines a:hover{color:var(--red);padding-left:12px}
   .contact .lines .k{font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.06em;font-size:calc(13px * var(--type-scale));opacity:.55}
   .contact .lines .v{font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:calc(20px * var(--type-scale))}
@@ -243,20 +267,6 @@
   footer{background:#000;padding:40px 28px;border-top:2px solid var(--red);color:#bbb;font-size:12px;letter-spacing:.06em}
   footer .row{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
   footer img{height:28px}
-
-  /* TWEAKS PANEL */
-  #tweaks-panel{position:fixed;bottom:20px;right:20px;z-index:100;background:#0c0c0c;border:1px solid var(--line);padding:20px 20px 18px;width:300px;font-family:var(--body);display:none;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-  #tweaks-panel h5{margin:0 0 14px;font-family:var(--display);font-style:italic;text-transform:uppercase;letter-spacing:.08em;color:var(--red);font-size:13px;display:flex;justify-content:space-between;align-items:center}
-  #tweaks-panel h5 .x{cursor:pointer;opacity:.6;font-size:14px}
-  #tweaks-panel h5 .x:hover{opacity:1}
-  #tweaks-panel .field{margin-bottom:14px}
-  #tweaks-panel .field label{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:6px;color:#fff}
-  #tweaks-panel .opts{display:flex;gap:6px}
-  #tweaks-panel .opts button{flex:1;padding:8px 6px;background:transparent;border:1px solid var(--line);color:#fff;font-family:var(--display);font-style:italic;text-transform:uppercase;font-size:11px;letter-spacing:.06em;cursor:pointer;transition:all .15s}
-  #tweaks-panel .opts button:hover{border-color:#fff}
-  #tweaks-panel .opts button.on{background:var(--red);border-color:var(--red)}
-  #tweaks-panel input[type=range]{width:100%;accent-color:var(--red)}
-  #tweaks-panel .val{float:right;font-family:ui-monospace,monospace;font-size:11px;opacity:.6}
 
   /* ANCHOR OFFSET */
   .anchor{position:absolute;top:-80px}
@@ -373,7 +383,7 @@
     .contact{grid-template-columns:1fr;gap:30px}
     .contact h2{font-size:54px;line-height:.88;margin:0 0 14px}
     .contact p{font-size:15px;line-height:1.65}
-    .contact .lines a{padding:16px 0}
+    .contact .lines a,.contact .lines .static{padding:16px 0}
     .contact .lines a:hover{padding-left:0}
     .contact .lines .v{font-size:15px}
     .contact .lines .k{font-size:11px}
@@ -382,9 +392,6 @@
     footer{padding:28px 18px}
     footer .row{flex-direction:column;align-items:flex-start;gap:14px}
     footer img{height:22px}
-
-    /* TWEAKS PANEL */
-    #tweaks-panel{bottom:12px;right:12px;left:12px;width:auto;padding:16px}
   }
 
   /* ============ EXTRA SMALL (≤ 400px) ============ */
@@ -407,9 +414,10 @@
 </head>
 <body>
 
-<nav class="nav" data-menu-open="false" id="mainNav">
+<a class="skip" href="#story">Skip to content</a>
+<nav class="nav" data-menu-open="false" id="mainNav" aria-label="Main">
   <div class="brand">
-    <img src="assets/logo-full-white.png" alt="Griffin Yellin" />
+    <a href="#hero" aria-label="Griffin Yellin — top of page"><img src="assets/logo-full-white.png" alt="Griffin Yellin" width="322" height="60" /></a>
   </div>
   <div class="links">
     <a href="#story">Story</a>
@@ -427,34 +435,35 @@
 </nav>
 
 <!-- ============ HERO ============ -->
-<section class="hero variant-a" id="hero">
-  <video autoplay muted loop playsinline preload="metadata">
+<section class="hero variant-b" id="hero">
+  <video autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1">
     <source src="https://video.wixstatic.com/video/ac240c_9199118851e84ca0a8e96e3f0c1fd9c9/1080p/mp4/file.mp4" type="video/mp4" />
   </video>
   <div class="vig"></div>
-  <div class="content hero-a">
-    <div class="tag" style="color:var(--red)">New York · Carmel, IN · The Road to Indy</div>
-    <h1 class="hero-name">
-      <span class="r1">Griffin</span>
-      <span class="r2">Yellin</span>
-    </h1>
-    <div class="strap">
-      <div class="bar"></div>
-      <div class="role">Driver <span class="slash">/</span> Race Engineer <span class="slash">/</span> Data</div>
+  <div class="content">
+    <div>
+      <div class="tag" style="color:var(--red)">Race Engineer · Data · Driver</div>
+      <h1 class="hero-name">
+        <span class="r1">Griffin</span>
+        <span class="r2">Yellin</span>
+      </h1>
+      <div class="meta">
+        <div><div class="k">Engineering</div><div class="v">F4 · USF Pro Champ.</div></div>
+        <div><div class="k">Education</div><div class="v">MTS · DAG · Top of Class</div></div>
+        <div><div class="k">Based</div><div class="v">Carmel, Indiana</div></div>
+      </div>
     </div>
-    <div class="meta">
-      <div><div class="k">Discipline</div><div class="v">Formula 4 · USF Pro</div></div>
-      <div><div class="k">Engineering</div><div class="v">MTS · DAG Graduate</div></div>
-      <div><div class="k">Sim</div><div class="v">Eclipse Competition</div></div>
-      <div><div class="k">Training</div><div class="v">PitFit Daily</div></div>
+    <div class="sidecard">
+      <h4><span class="dot"></span>Now</h4>
+      <p>Race engineer. Motorsport Technical School DAG graduate (April 2026, top of class), now coordinating MTS's US Performance Engineering course. Setup engineer at <a href="https://eclipsecompetition.com/" target="_blank" rel="noopener" style="border-bottom:1px solid rgba(255,255,255,.4)">Eclipse Competition</a>. Open to race engineering and data roles for 2027.</p>
+      <p style="margin-top:14px;opacity:.6;font-size:12px;font-family:ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase">Scroll for the story →</p>
     </div>
   </div>
-  <div class="hero-b" style="display:none"></div>
-  <div class="hero-c" style="display:none"></div>
   <div class="scrollhint">Scroll · The Story</div>
 </section>
 
-<div class="ticker">
+<main id="main">
+<div class="ticker" aria-hidden="true">
   <div class="ticker-inner" id="tick">
     <span>Sebring International Raceway</span>
     <span>Road America</span>
@@ -487,7 +496,7 @@
         <div class="tag eyebrow">From grief to the grid</div>
         <h2>A driver built in a cockpit. An engineer built <em>in the data.</em></h2>
         <p>Born and raised in New York City, I found racing in 2022 — a refuge from the grief of losing my father. What started as escape became obsession, then discipline, then career.</p>
-        <p>Four years later I've competed on the Road to Indy ladder with Jay Howard Driver Development, tested with ENVE Motorsports in USF Pro, and graduated the Motorsport Technical School's DAG track as a Performance Engineer. I'm now in Carmel, Indiana, living and breathing the sport from both sides of the garage wall — building the car, driving the car, reading its data, and chasing the only goal that still matters: a professional seat on the way to the NTT INDYCAR Series, and becoming the first Puerto Rican to do so.</p>
+        <p>Four years later I've competed on the Road to Indy ladder with Jay Howard Driver Development, tested with ENVE Motorsports in USF Pro, graduated top of my class from the Motorsport Technical School's DAG track as a Performance Engineer, and engineered an F4 car to a podium. I'm now in Carmel, Indiana, living and breathing the sport from both sides of the garage wall — building the car, reading its data, and chasing the only goal that still matters: a race engineering role on the way to the NTT INDYCAR Series, representing Puerto Rico while I do it.</p>
       </div>
       <div class="panel">
         <h4>Fact Sheet</h4>
@@ -495,6 +504,7 @@
           <li><span class="k">Born</span><span class="v">New York City</span></li>
           <li><span class="k">Based</span><span class="v">Carmel, Indiana</span></li>
           <li><span class="k">Education</span><span class="v">Dalton · MTS DAG</span></li>
+          <li><span class="k">Engineering</span><span class="v">F4 · USF Pro · SIM</span></li>
           <li><span class="k">Seat Time</span><span class="v">F4 · USF · SIM</span></li>
           <li><span class="k">Goal</span><span class="v" style="color:var(--red)">NTT INDYCAR</span></li>
         </ul>
@@ -524,10 +534,10 @@
         </div>
       </div>
       <div class="media">
-        <div class="big"><img src="assets/sebring1.jpg" alt="Sebring — car #30" /></div>
+        <div class="big"><img loading="lazy" decoding="async" src="assets/sebring1.jpg" alt="Griffin Yellin in the #30 Skip Barber Formula 4 car at Sebring" /></div>
         <div class="row">
-          <div class="t"><img src="assets/sebring2.jpg" alt="Sebring" /></div>
-          <div class="t"><img src="assets/sb-new.jpg" alt="Skip Barber paddock" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/sebring2.jpg" alt="Skip Barber Formula 4 on track at Sebring" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/sb-new.jpg" alt="Skip Barber paddock" /></div>
         </div>
         <figcaption>Skip Barber Racing School · F4 · 2023–24</figcaption>
       </div>
@@ -552,7 +562,7 @@
 </section>
 
 <!-- ============ JAY HOWARD ============ -->
-<div class="divider" style="display:flex;align-items:center;gap:20px"><span class="n">02</span><span class="t">Jay Howard Driver Development — The Ladder</span><img src="assets/jhdd-logo.png" alt="JHDD" style="height:34px;width:auto;margin-left:auto;filter:invert(0)" /><span class="y">2024 — 2025</span></div>
+<div class="divider" style="display:flex;align-items:center;gap:20px"><span class="n">02</span><span class="t">Jay Howard Driver Development — The Ladder</span><img loading="lazy" decoding="async" src="assets/jhdd-logo.png" alt="JHDD" style="height:34px;width:auto;margin-left:auto;filter:invert(0)" /><span class="y">2024 — 2025</span></div>
 <section class="sec-paper" id="jh">
   <div class="wrap">
     <div class="chapter flip">
@@ -572,11 +582,11 @@
         </div>
       </div>
       <div class="media">
-        <div class="big"><img src="assets/rdam4.jpg" alt="Road America" /></div>
+        <div class="big"><img loading="lazy" decoding="async" src="assets/rdam4.jpg" alt="Griffin Yellin, #7 JHDD, at Road America" /></div>
         <div class="row">
-          <div class="t"><img src="assets/ims3.jpg" alt="IMS" /></div>
-          <div class="t"><img src="assets/portland1.jpg" alt="Portland" /></div>
-          <div class="t"><img src="assets/rdam7.jpg" alt="Road America" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/ims3.jpg" alt="Indianapolis Motor Speedway combine" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/portland1.jpg" alt="Portland International Raceway, JHDD" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/rdam7.jpg" alt="Road America paddock, JHDD" /></div>
         </div>
         <figcaption>Road America · IMS · Portland · JHDD USF Pro · 2024–25</figcaption>
       </div>
@@ -585,11 +595,11 @@
     <!-- second row -->
     <div class="chapter" style="margin-top:80px">
       <div class="media">
-        <div class="big"><img src="assets/irp-6839.jpg" alt="IRP Oval spotter" /></div>
+        <div class="big"><img loading="lazy" decoding="async" src="assets/irp-6839.jpg" alt="Griffin Yellin spotting at the IRP oval for JHDD" /></div>
         <div class="row">
-          <div class="t"><img src="assets/irp-6833.jpg" alt="IRP Oval" /></div>
-          <div class="t"><img src="assets/ims4.jpg" alt="IMS Combine" /></div>
-          <div class="t"><img src="assets/rdam12.jpg" alt="Road America" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/irp-6833.jpg" alt="Lucas Oil Indianapolis Raceway Park oval" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/ims4.jpg" alt="IMS Combine" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/rdam12.jpg" alt="Road America, JHDD USF Pro Championships" /></div>
         </div>
         <figcaption>"The driver-engineer loop started here." — IRP Oval, May 2025</figcaption>
       </div>
@@ -626,11 +636,11 @@
         </div>
       </div>
       <div class="media">
-        <div class="big"><img src="assets/thermal1.jpg" alt="Thermal" /></div>
+        <div class="big"><img loading="lazy" decoding="async" src="assets/thermal1.jpg" alt="Griffin Yellin testing at The Thermal Club with ENVE Motorsports" /></div>
         <div class="row">
-          <div class="t"><img src="assets/thermal2.jpg" alt="Thermal" /></div>
-          <div class="t"><img src="assets/thermal3.jpg" alt="Thermal" /></div>
-          <div class="t"><img src="assets/thermal4.jpg" alt="Thermal" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/thermal2.jpg" alt="ENVE Motorsports test day, The Thermal Club" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/thermal3.jpg" alt="Pit lane at The Thermal Club" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/thermal4.jpg" alt="USF Pro car on track at The Thermal Club" /></div>
         </div>
         <figcaption>The Thermal Club · ENVE Motorsports Test Program · 2024–25</figcaption>
       </div>
@@ -639,26 +649,26 @@
 </section>
 
 <!-- ============ MTS / ENGINEERING ============ -->
-<div class="divider"><span class="n">04</span><span class="t">Motorsport Technical School — Race Engineer</span><span class="y">2025 — 2026</span></div>
+<div class="divider"><span class="n">04</span><span class="t">Race Engineering — MTS · Berg Racing</span><span class="y">2025 — PRESENT</span></div>
 <section class="sec-paper" id="mts">
   <div class="wrap">
     <div class="eng-hero">
       <div>
-        <div class="tag" style="color:var(--red)">Lead Race Engineer · DAG Graduate</div>
+        <div class="tag" style="color:var(--red)">Race Engineer · DAG Graduate, Top of Class</div>
         <h3>The other side <em>of the wall.</em></h3>
-        <p>I graduated the Motorsport Technical School's DAG (Data Acquisition &amp; Analysis) track yesterday, April 18, 2026, in Carmel, Indiana — an intensive race-engineering program covering data acquisition, vehicle dynamics, tire science, aero balance, suspension, powertrain analysis and race strategy on the Ligier JSF4 platform.</p>
-        <p>I led the team as Race Engineer for our F4 track day at Putnam Park: I rebuilt and reorganized the wiring loom and harness on the Ligier JSF4, serviced all engine and chassis connectors, contributed directly to a full engine swap, and monitored HPD engine parameters during first crank. I sourced the full technical manual library (HPD, Sadev, JRi, AIM, Tilton, GEMS) and worked directly with manufacturers through my personal industry network to resolve engineering questions in real time.</p>
-        <p>I also built the team's entire engineering document stack from scratch in Excel — run plan, setup sheet, driver procedure, lap tracker, tire tracker, engine break-in tracker, spare parts manifest, and driver feedback sheet — plus a live setup configuration app at <a href="https://gysetupconfig.netlify.app" style="color:var(--red);border-bottom:1px solid var(--red)">gysetupconfig.netlify.app</a>.</p>
+        <p>In April 2026 I graduated top of my class from the Motorsport Technical School's DAG (Data Acquisition &amp; Analysis) track in Indianapolis — an intensive race-engineering program covering data acquisition, vehicle dynamics, tire science, aero balance, suspension, powertrain analysis and race strategy on the Ligier JSF4 platform.</p>
+        <p>I led the team as Race Engineer for our F4 track day at Putnam Park: I rebuilt and reorganized the wiring loom and harness on the Ligier JSF4, serviced all engine and chassis connectors, contributed directly to a full engine swap, and monitored HPD engine parameters during first crank. I sourced the full technical manual library (HPD, Sadev, JRi, AIM, Tilton, GEMS) and built the team's entire engineering document stack from scratch — run plan, setup sheet, driver procedure, lap and tire trackers, engine break-in tracker, spare parts manifest, driver feedback sheet — plus a live setup-configuration web app.</p>
+        <p>A month after graduating I was race engineering for real. As Race Engineer and interim shop manager for Berg Racing's F4 / USF Juniors program (May–June 2026) I ran setup, run plans, fuel and tire strategy, GEMS data and live driver feedback across four Ligier JSF4s — and engineered a driver to P2 in Race 1: the team's first podium, in its first event in the series, on its first weekend on the chassis. Since August 2026 I've also coordinated MTS's US Performance Engineering course, the link between the Italy-based school, its instructors and the Indianapolis cohort, teaching as a junior instructor on sim, data and track days.</p>
         <div class="eng-cta">
           <a class="btn primary" href="assets/GriffinYellin_Resume.pdf" download><span>Download Résumé</span><span class="arr">↓</span></a>
-          <a class="btn" href="https://gysetupconfig.netlify.app" target="_blank"><span>Live Setup App</span><span class="arr">↗</span></a>
+          <a class="btn" href="#contact"><span>Engineering Inquiries</span><span class="arr">→</span></a>
         </div>
       </div>
       <div>
         <div class="eng-media">
-          <div class="t"><img src="assets/mts-a.jpg" alt="MTS · sim shop" /></div>
-          <div class="t small"><img src="assets/mts-b.jpg" alt="MTS · Ligier JSF4 data" /></div>
-          <div class="t" style="grid-column:1 / -1"><img src="assets/mts-d.jpg" alt="MTS · team review" /></div>
+          <div class="t"><img loading="lazy" decoding="async" src="assets/mts-a.jpg" alt="Motorsport Technical School simulator shop" /></div>
+          <div class="t small"><img loading="lazy" decoding="async" src="assets/mts-b.jpg" alt="Ligier JSF4 data review at Motorsport Technical School" /></div>
+          <div class="t" style="grid-column:1 / -1"><img loading="lazy" decoding="async" src="assets/mts-d.jpg" alt="Motorsport Technical School team debrief" /></div>
         </div>
         <figcaption style="font-family:ui-monospace,monospace;font-size:11px;opacity:.6;margin-top:10px;letter-spacing:.08em;text-transform:uppercase">Motorsport Technical School · DAG · Ligier JSF4 · Putnam Park</figcaption>
       </div>
@@ -667,7 +677,7 @@
     <div class="eng-stack">
       <div class="card">
         <h5>Data &amp; DAQ</h5>
-        <p>GEMS ECU · Cosworth Pi Toolbox · AIM Systems · data &amp; math channels · iRacing · custom tool development</p>
+        <p>GEMS ECU · Cosworth Pi Toolbox · AIM Systems · WinTax · data &amp; math channels · iRacing · custom tool development</p>
       </div>
       <div class="card">
         <h5>Vehicle Dynamics</h5>
@@ -679,7 +689,7 @@
       </div>
       <div class="card">
         <h5>Systems</h5>
-        <p>PC hardware (CPU/GPU) · sim rig build · Microsoft Suite · PitFit daily training (IndyCar level)</p>
+        <p>PC hardware (CPU/GPU) · sim rig build · Microsoft Office · IndyCar PitFit training</p>
       </div>
     </div>
   </div>
@@ -693,15 +703,16 @@
       <div class="copy">
         <div class="badge"><span class="d"></span> Active Engineer</div>
         <h3>Setup work for <em>elite sim</em> teams.</h3>
-        <p>Off the physical grid, I'm a setup engineer for Eclipse Competition — an elite sim-racing team competing at the top of iRacing. My job: develop, test and validate the setups that put Eclipse drivers on the front row of the hardest online series in motorsport.</p>
+        <p>Off the physical grid, I'm a setup engineer for <a href="https://eclipsecompetition.com/" target="_blank" rel="noopener" style="color:#a855f7;border-bottom:1px solid #a855f7">Eclipse Competition</a> — an elite sim-racing team competing at the top of iRacing. My job: develop, test and validate the setups that put Eclipse drivers on the front row of the hardest online series in motorsport.</p>
         <p>Eclipse is not a bedroom roster. The lineup is built almost entirely of real-world racers — people who know what a car is actually doing on track and can give the kind of feedback an engineer can build on. That's the reason the setup work matters here: it's the same DAQ, the same tire-model questions, the same damper-vs-spring conversations — just with a different telemetry pipe. Every hour here feeds directly into the real-world engineering I do at the track, and vice versa.</p>
         <div class="eng-cta">
+          <a class="btn on-dark" href="https://eclipsecompetition.com/" target="_blank" rel="noopener"><span>eclipsecompetition.com</span><span class="arr">↗</span></a>
           <a class="btn on-dark" href="#contact"><span>Engineering Inquiries</span><span class="arr">→</span></a>
         </div>
       </div>
-      <div class="logo-box">
-        <img src="assets/eclipse-white.png" alt="Eclipse Competition" />
-      </div>
+      <a class="logo-box" href="https://eclipsecompetition.com/" target="_blank" rel="noopener" aria-label="Eclipse Competition website">
+        <img src="assets/eclipse-white.png" alt="Eclipse Competition" loading="lazy" decoding="async" />
+      </a>
     </div>
   </div>
 </section>
@@ -733,154 +744,39 @@
   <div class="wrap">
     <div class="contact">
       <div>
-        <div class="tag" style="color:var(--red)">Open for sponsorship, engineering, coaching</div>
+        <div class="tag" style="color:var(--red)">Open for engineering roles, coaching, partnerships</div>
         <h2>Build <em>something</em> with me.</h2>
-        <p>Driver, race engineer and data specialist. Based in Carmel, Indiana. Available for seats, engineering roles, test days, coaching, sim-team contracts and sponsor partnerships. The fastest way to reach me is email.</p>
+        <p>Race engineer, data specialist and driver. Based in Carmel, Indiana, willing to travel anywhere the calendar goes. Available for race engineering and data roles, test days, driver coaching, sim-team contracts and sponsor partnerships. The fastest way to reach me is email.</p>
         <div class="eng-cta" style="margin-top:28px">
           <a class="btn primary" href="assets/GriffinYellin_Resume.pdf" download><span>Download Résumé</span><span class="arr">↓</span></a>
         </div>
       </div>
       <div class="lines">
-        <a href="mailto:griffin@griffinyellinracing.com"><span class="k">Email</span><span class="v">griffin@griffinyellinracing.com</span></a>
-        <a href="https://instagram.com/griffinyellin" target="_blank"><span class="k">Instagram</span><span class="v">@griffinyellin</span></a>
-        <a href="https://www.linkedin.com/in/griffin-yellin-39a463252/" target="_blank"><span class="k">LinkedIn</span><span class="v">griffin-yellin</span></a>
-        <a href="tel:+19175150451"><span class="k">Phone</span><span class="v">917 · 515 · 0451</span></a>
-        <a><span class="k">Based</span><span class="v">Carmel, Indiana</span></a>
+        <a href="mailto:griffyellin@outlook.com"><span class="k">Email</span><span class="v">griffyellin@outlook.com</span></a>
+        <a href="https://www.linkedin.com/in/griffin-yellin-39a463252/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">griffin-yellin</span></a>
+        <a href="https://instagram.com/griffinyellin" target="_blank" rel="noopener"><span class="k">Instagram</span><span class="v">@griffinyellin</span></a>
+        <a href="https://eclipsecompetition.com/" target="_blank" rel="noopener"><span class="k">Sim Team</span><span class="v">eclipsecompetition.com</span></a>
+        <div class="static"><span class="k">Based</span><span class="v">Carmel, Indiana</span></div>
       </div>
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="row">
-    <img src="assets/logo-full-white.png" alt="Griffin Yellin" />
-    <div>© 2026 Griffin Yellin Racing · Driver · Engineer · Data</div>
+    <img src="assets/logo-full-white.png" alt="Griffin Yellin" width="322" height="60" loading="lazy" />
+    <div>© 2026 Griffin Yellin Racing · Race Engineer · Data · Driver</div>
     <div style="display:flex;gap:20px">
-      <a href="mailto:griffin@griffinyellinracing.com">Email</a>
-      <a href="https://instagram.com/griffinyellin" target="_blank">IG</a>
-      <a href="https://www.linkedin.com/in/griffin-yellin-39a463252/" target="_blank">LinkedIn</a>
+      <a href="mailto:griffyellin@outlook.com">Email</a>
+      <a href="https://www.linkedin.com/in/griffin-yellin-39a463252/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://instagram.com/griffinyellin" target="_blank" rel="noopener">IG</a>
+      <a href="https://eclipsecompetition.com/" target="_blank" rel="noopener">Eclipse</a>
     </div>
   </div>
 </footer>
 
-<!-- ============ TWEAKS ============ -->
-<div id="tweaks-panel">
-  <h5>Tweaks <span class="x" onclick="document.getElementById('tweaks-panel').style.display='none'">✕</span></h5>
-  <div class="field">
-    <label>Hero Variant</label>
-    <div class="opts" id="opt-hero">
-      <button data-v="a" class="on">A · Giant</button>
-      <button data-v="b">B · Split</button>
-      <button data-v="c">C · Plate</button>
-    </div>
-  </div>
-  <div class="field">
-    <label>Typography Scale <span class="val" id="scale-val">1.00</span></label>
-    <input type="range" id="scale-slider" min="0.85" max="1.2" step="0.05" value="1" />
-  </div>
-</div>
-
 <script>
-  const TWEAKS = /*EDITMODE-BEGIN*/{
-    "heroVariant": "b",
-    "typeScale": 1.05
-  }/*EDITMODE-END*/;
-
-  // ---- Hero variant rendering ----
-  const heroEl = document.querySelector('.hero');
-  function renderHero(v){
-    heroEl.classList.remove('variant-a','variant-b','variant-c');
-    heroEl.classList.add('variant-' + v);
-    const content = heroEl.querySelector('.content');
-    if (v === 'a') {
-      content.innerHTML = `
-        <div class="tag" style="color:var(--red)">New York · Carmel, IN · The Road to Indy</div>
-        <h1 class="hero-name">
-          <span class="r1">Griffin</span>
-          <span class="r2">Yellin</span>
-        </h1>
-        <div class="strap">
-          <div class="bar"></div>
-          <div class="role">Driver <span class="slash">/</span> Race Engineer <span class="slash">/</span> Data</div>
-        </div>
-        <div class="meta">
-          <div><div class="k">Discipline</div><div class="v">Formula 4 · USF Pro</div></div>
-          <div><div class="k">Engineering</div><div class="v">MTS · DAG Graduate</div></div>
-          <div><div class="k">Sim</div><div class="v">Eclipse Competition</div></div>
-          <div><div class="k">Training</div><div class="v">PitFit Daily</div></div>
-        </div>`;
-    } else if (v === 'b') {
-      content.innerHTML = `
-        <div>
-          <div class="tag" style="color:var(--red)">Driver · Engineer · Data</div>
-          <h1 class="hero-name">
-            <span class="r1">Griffin</span>
-            <span class="r2">Yellin</span>
-          </h1>
-          <div class="meta">
-            <div><div class="k">Discipline</div><div class="v">Formula 4 · USF Pro</div></div>
-            <div><div class="k">Engineering</div><div class="v">MTS · DAG</div></div>
-            <div><div class="k">Based</div><div class="v">Carmel, Indiana</div></div>
-          </div>
-        </div>
-        <div class="sidecard">
-          <h4><span class="dot"></span>Now</h4>
-          <p>Lead Race Engineer at Motorsport Technical School. Setup engineer at Eclipse Competition. Open for seats, engineering roles, coaching, and sponsor partnerships.</p>
-          <p style="margin-top:14px;opacity:.6;font-size:12px;font-family:ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase">Scroll for the story →</p>
-        </div>`;
-    } else {
-      content.innerHTML = `
-        <div class="plate">Griffin Yellin Racing · Est. 2022</div>
-        <h1 class="hero-name">
-          <span class="r1">Griffin</span>
-          <span class="r2">Yellin</span>
-        </h1>
-        <div class="sub">Driver <span>/</span> Race Engineer <span>/</span> Data</div>`;
-    }
-  }
-  renderHero(TWEAKS.heroVariant);
-
-  // ---- Type scale ----
-  function applyScale(s){ document.documentElement.style.setProperty('--type-scale', s); }
-  applyScale(TWEAKS.typeScale);
-
-  // ---- Tweaks wiring ----
-  document.querySelectorAll('#opt-hero button').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('#opt-hero button').forEach(b=>b.classList.remove('on'));
-      btn.classList.add('on');
-      TWEAKS.heroVariant = btn.dataset.v;
-      renderHero(btn.dataset.v);
-      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{heroVariant: btn.dataset.v}}, '*');
-    });
-  });
-  // set current "on" for variant
-  document.querySelectorAll('#opt-hero button').forEach(b=>{
-    b.classList.toggle('on', b.dataset.v === TWEAKS.heroVariant);
-  });
-  const scaleSlider = document.getElementById('scale-slider');
-  const scaleVal = document.getElementById('scale-val');
-  scaleSlider.value = TWEAKS.typeScale;
-  scaleVal.textContent = Number(TWEAKS.typeScale).toFixed(2);
-  scaleSlider.addEventListener('input', e=>{
-    const v = parseFloat(e.target.value);
-    TWEAKS.typeScale = v;
-    scaleVal.textContent = v.toFixed(2);
-    applyScale(v);
-    window.parent.postMessage({type:'__edit_mode_set_keys', edits:{typeScale: v}}, '*');
-  });
-
-  // ---- Edit mode registration (register listener first, then announce) ----
-  window.addEventListener('message', (e)=>{
-    const d = e.data || {};
-    if (d.type === '__activate_edit_mode') {
-      document.getElementById('tweaks-panel').style.display = 'block';
-    } else if (d.type === '__deactivate_edit_mode') {
-      document.getElementById('tweaks-panel').style.display = 'none';
-    }
-  });
-  window.parent.postMessage({type:'__edit_mode_available'}, '*');
-
   // Smooth scroll for in-page links
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click', e=>{
